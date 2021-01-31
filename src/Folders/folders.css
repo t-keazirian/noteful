@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+}
+
+.folders-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.folder-list {
+  display: flex;
+  list-style-type: none;
+  flex-direction: column;
+  border: 1px solid black;
+  margin: 5px;
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  justify-content: center;
+}
+
+.selected-folder li {
+  font-weight: bold;
+  color: #5BC0BE;
+  background-color:#1C2541;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: #5BC0BE;
+}
+
+a:active {
+  color: black;
+}
+
+.add-folder-btn {
+  margin-left: 65px;
+  background-color:#1C2541;
+  border-radius:21px;
+  display:inline-block;
+  cursor:pointer;
+  color: #5BC0BE;
+  font-family:Arial;
+  font-size:17px;
+  padding:10px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #283966;
+  width: 100px;
+}
+
+.add-folder-btn:hover {
+  background-color:#476e9e;
+  cursor: pointer;
+}
+
+.add-folder-btn:active {
+  position:relative;
+  top:1px;
+}

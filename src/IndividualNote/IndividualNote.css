@@ -1,0 +1,41 @@
+.folder-name {
+  text-align: center;
+  font-size: 36px;
+}
+
+.one-note {
+  display: flex;
+  flex-direction: column;
+  border: 2px black solid;
+  padding: 10px;
+  margin-bottom: 20px; 
+}
+
+.note-container {
+  margin: 50px;
+}
+
+.back-button {
+  background-color:#1C2541;
+  border-radius:21px;
+  display:inline-block;
+  cursor:pointer;
+  color: #5BC0BE;
+  font-family:Arial;
+  font-size:17px;
+  padding:18px 20px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #283966;
+}
+
+.back-button:hover {
+  background-color:#476e9e;
+  cursor: pointer;
+}
+
+.back-button:active {
+  position:relative;
+  top:1px;
+}
+  
+

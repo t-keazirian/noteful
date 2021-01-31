@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Route } from "react-router-dom";
+import Folders from './Folders/Folders';
+import Notes from './Notes/Notes';
+import Main from './Main/Main';
+import store from './store';
 import './App.css';
+import IndividualNote from './IndividualNote/IndividualNote';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { store }
+    // console.log(this.state.store)
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <Route
+          path='/'
+          component={Main}
+        />
+        <div className='container'>
+        <div className='item folders'>
+          <Route
+            exact path={['/', '/folder/:folderId']}
+            component={Folders}
+          />
+        </div>
+          <div className='item notes'>
+          <Route 
+            path='/note/:id'
+            component={IndividualNote}
+          />
+          <Route
+            exact path={['/folder/:folderId', '/']}
+            component={Notes}
+          />
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default App;
