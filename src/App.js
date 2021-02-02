@@ -3,43 +3,81 @@ import { Route } from "react-router-dom";
 import Folders from './Folders/Folders';
 import Notes from './Notes/Notes';
 import Main from './Main/Main';
-import store from './store';
 import './App.css';
 import IndividualNote from './IndividualNote/IndividualNote';
+import ApiContext from './Context/ApiContext';
+import config from './config';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { store }
-    // console.log(this.state.store)
+    this.state = { 
+      notes: [],
+      folders: []
+     }
+  }
+
+  componentDidMount() {
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/notes`),
+      fetch(`${config.API_ENDPOINT}/folders`)
+    ])
+    .then(([notesResponse, foldersResponse]) => {
+      if (!notesResponse.ok) 
+        return notesResponse.json().then(error => console.log(error));
+      if (!foldersResponse.ok) 
+        return foldersResponse.json().then(error => console.log(error));
+
+      return Promise.all([notesResponse.json(), foldersResponse.json()]);
+    })
+    .then(([notes, folders]) => {
+      this.setState({notes, folders});
+    }) 
+    .catch(error => {
+      console.log(error);
+    })
+  }
+  
+  handleDeleteNote = (noteId) => {
+    const newNotes = this.state.notes.filter(note => note.id !== noteId);
+
+    this.setState({notes: newNotes});
   }
 
   render() {
+    const contextValue = {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      deleteNote: this.handleDeleteNote,
+    }
     return (
-      <div className='App'>
-        <Route
-          path='/'
-          component={Main}
-        />
-        <div className='container'>
-        <div className='item folders'>
+      <ApiContext.Provider 
+        value={contextValue}>
+        <div className='App'>
           <Route
-            exact path={['/', '/folder/:folderId']}
-            component={Folders}
+            path='/'
+            component={Main}
           />
-        </div>
-          <div className='item notes'>
-          <Route 
-            path='/note/:id'
-            component={IndividualNote}
-          />
-          <Route
-            exact path={['/folder/:folderId', '/']}
-            component={Notes}
-          />
+          <div className='container'>
+          <div className='item folders'>
+            <Route
+              exact path={['/', '/folder/:folderId']}
+              component={Folders}
+            />
+          </div>
+            <div className='item notes'>
+            <Route 
+              path='/note/:id'
+              component={IndividualNote}
+            />
+            <Route
+              exact path={['/folder/:folderId', '/']}
+              component={Notes}
+            />
+            </div>
           </div>
         </div>
-      </div>
+      </ApiContext.Provider>
     )
   }
 }
