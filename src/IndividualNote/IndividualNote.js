@@ -9,7 +9,6 @@ class IndividualNote extends React.Component {
 
   static contextType = ApiContext;
 
-  // handleClickGoBack is working properly
   handleClickGoBack = () => {
     this.props.history.goBack();
   }
@@ -25,11 +24,8 @@ class IndividualNote extends React.Component {
       this.context.deleteNote(this.props.match.params.id);
     });
   }
-
-    // context.consumer here??  or where?
     
     render() {
-    // added in the const here (like in Notes) and changed LIST to just notes/folders from context - seems to work
     const { notes=[], folders=[] } = this.context;
 
     const oneNote = notes.find(note => note.id === this.props.match.params.id)
@@ -44,7 +40,7 @@ class IndividualNote extends React.Component {
           className='back-button'
           onClick={this.handleClickGoBack}
         >
-          ⬅️ Go Back
+          Go Back
         </button>
         { (notes.length > 0)
           ? <div>
@@ -59,6 +55,7 @@ class IndividualNote extends React.Component {
                 </p>
                 <p className='content'>
                   {oneNote.content}</p>
+                <div className='button-div'>
                 <button 
                   type='button'
                   className='delete-btn'
@@ -66,6 +63,7 @@ class IndividualNote extends React.Component {
                 >
                   Delete Note
                 </button>
+              </div>
               </div>
             </div>
           : <div>Loading...</div>

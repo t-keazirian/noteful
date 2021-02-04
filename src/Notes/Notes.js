@@ -8,13 +8,11 @@ class Notes extends React.Component {
 
   static contextType = ApiContext;
 
-  // need to implement this somehow...
   handleClickDelete = (noteId) => {
         this.context.deleteNote(noteId);
   }
 
   render() {
-    // added this first const and changed LIST.notes.filter to just notes.filter
     const { notes=[] } = this.context;
     const note = notes.filter(n => {
       if (!this.props.match.params.folderId) {
@@ -41,6 +39,7 @@ class Notes extends React.Component {
                     {note.modified}
                   </Moment>
                 </span>
+              <div className='button-div'>
                 <button 
                   type='button'
                   className='delete-note-btn'
@@ -48,6 +47,7 @@ class Notes extends React.Component {
                 >
                   Delete Note
                 </button>
+              </div>
               </div>
             </li>
           )}
@@ -58,11 +58,3 @@ class Notes extends React.Component {
 }
 
 export default Notes;
-
-/*
-
-if (LIST.folders.id === LIST.notes.folderId)
-
-
-
-*/

@@ -1,0 +1,50 @@
+.new-note-container {
+  margin: 20px;
+  border: 2px solid black;
+}
+
+.new-note-container h2 {
+  padding-top: 15px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+label {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.button-div {
+  display: flex;
+  justify-content: center;
+}
+
+.note-submit-button {
+  margin-bottom: 15px;
+  margin-top: 10px;
+  padding:10px;
+  background-color:#1C2541;
+  border-radius:21px;
+  cursor:pointer;
+  color: #5BC0BE;
+  font-family:Arial;
+  font-size:15px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #283966;
+}
+
+.note-submit-button:hover {
+  background-color:#476e9e;
+  cursor: pointer;
+}
+
+.note-submit-button:active {
+  position:relative;
+  top:1px;
+}

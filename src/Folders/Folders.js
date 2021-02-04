@@ -1,6 +1,6 @@
 import React from 'react';
 import './folders.css';
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ApiContext from '../Context/ApiContext';
 
 class Folders extends React.Component {
@@ -26,12 +26,26 @@ class Folders extends React.Component {
           </NavLink>
           )}
         </ul>
-        <button
-        type='button'
-        className='add-folder-btn'
+        <Link
+          to='/add-folder'
         >
-          Add Folder
-        </button>
+          <button
+          type='button'
+          className='add-folder-btn'
+          >
+            Add Folder
+          </button>
+        </Link>
+        <Link
+          to='/add-note'
+        >
+            <button
+              type='button'
+              className='add-note-btn'
+            >
+              Add Note
+            </button>
+        </Link>
       </div>
     )
   }

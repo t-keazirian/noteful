@@ -7,6 +7,8 @@ import './App.css';
 import IndividualNote from './IndividualNote/IndividualNote';
 import ApiContext from './Context/ApiContext';
 import config from './config';
+import AddNote from './AddNote/AddNote';
+import AddFolder from './AddFolder/AddFolder';
 
 class App extends React.Component {
   constructor(props) {
@@ -44,11 +46,25 @@ class App extends React.Component {
     this.setState({notes: newNotes});
   }
 
+  handleAddNote = (newNote) => {
+    this.setState({
+      notes: [...this.state.notes, newNote]
+    }) 
+  } 
+
+  handleAddFolder = (newFolder) => {
+    this.setState({
+      folders: [...this.state.folders, newFolder]
+    })
+  }
+
   render() {
     const contextValue = {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
+      addNote: this.handleAddNote,
+      addFolder: this.handleAddFolder
     }
     return (
       <ApiContext.Provider 
@@ -69,6 +85,14 @@ class App extends React.Component {
             <Route 
               path='/note/:id'
               component={IndividualNote}
+            />
+            <Route 
+              path='/add-note'
+              component={AddNote}
+            />
+            <Route 
+              path='/add-folder'
+              component={AddFolder}
             />
             <Route
               exact path={['/folder/:folderId', '/']}
