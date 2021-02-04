@@ -44,20 +44,21 @@ class IndividualNote extends React.Component {
           className='back-button'
           onClick={this.handleClickGoBack}
         >
-          Go Back
+          ⬅️ Go Back
         </button>
         { (notes.length > 0)
           ? <div>
               <h2 className='folder-name'>{currentFolder.name}</h2>
               <div className='one-note'>
                 <h2>{oneNote.name}</h2>
-                <p>
+                <p className='modified-date'>
                   Modified{' '} 
                   <Moment format='D MMM YYYY'>
                     {oneNote.modified}
                   </Moment>
                 </p>
-                <p>{oneNote.content}</p>
+                <p className='content'>
+                  {oneNote.content}</p>
                 <button 
                   type='button'
                   className='delete-btn'
