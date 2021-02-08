@@ -2,13 +2,15 @@ import React from 'react';
 import ApiContext from '../Context/ApiContext';
 import config from '../config';
 import './addfolder.css';
+import ValidationError from '../ValidationError/ValidationError';
 
 class AddFolder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       folder: {
-        value: ''
+        value: '',
+        touched: false,
       }
     }
   }
@@ -38,13 +40,22 @@ class AddFolder extends React.Component {
   updateFolder(folder) {
     this.setState({
       folder: {
-        value: folder
+        value: folder,
+        touched: true
       }
     })
   }
 
+  validateFolder() {
+    const folder = this.state.folder.value.trim();
+    if (folder.length === 0) {
+      return 'Your folder must have a name.';
+    }
+  }
+
   render() {
-   
+   const folderError = this.validateFolder();
+
     return (
       <div className='new-folder-container'>
         <h2>Create a new folder:</h2>
@@ -53,8 +64,15 @@ class AddFolder extends React.Component {
             <label htmlFor='folder-name-input'>Folder Name:</label>
             <input type='text' id='folder-name-input' name='folder-name-input' onChange={e => this.updateFolder(e.target.value)}/>
           </div>
+
+      {this.state.folder.touched && <ValidationError message={folderError} />}
+
           <div className='button-div'>
-            <button type='submit' className='folder-submit-button'
+            <button 
+            type='submit' className='folder-submit-button'
+            disabled={
+              this.validateFolder()
+            }
             >Add Folder</button>
           </div>
         </form>

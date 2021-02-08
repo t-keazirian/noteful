@@ -9,6 +9,7 @@ import ApiContext from './Context/ApiContext';
 import config from './config';
 import AddNote from './AddNote/AddNote';
 import AddFolder from './AddFolder/AddFolder';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends React.Component {
   constructor(props) {
@@ -70,34 +71,46 @@ class App extends React.Component {
       <ApiContext.Provider 
         value={contextValue}>
         <div className='App'>
-          <Route
-            path='/'
-            component={Main}
-          />
+          <ErrorBoundary>
+            <Route
+              path='/'
+              component={Main}
+            />
+          </ErrorBoundary>
           <div className='container'>
-          <div className='item folders'>
-            <Route
-              exact path={['/', '/folder/:folderId']}
-              component={Folders}
-            />
-          </div>
-            <div className='item notes'>
-            <Route 
-              path='/note/:id'
-              component={IndividualNote}
-            />
-            <Route 
-              path='/add-note'
-              component={AddNote}
-            />
-            <Route 
-              path='/add-folder'
-              component={AddFolder}
-            />
-            <Route
-              exact path={['/folder/:folderId', '/']}
-              component={Notes}
-            />
+            <div className='folders'>
+              <ErrorBoundary>
+                <Route
+                  exact path={['/', '/folder/:folderId']}
+                  component={Folders}
+                />
+              </ErrorBoundary>
+            </div>
+            <div className='notes'>
+              <ErrorBoundary>
+                <Route 
+                  path='/note/:id'
+                  component={IndividualNote}
+                />
+              </ErrorBoundary>
+              <ErrorBoundary>
+                <Route 
+                  path='/add-note'
+                  component={AddNote}
+                />
+              </ErrorBoundary>
+              <ErrorBoundary>
+                <Route 
+                  path='/add-folder'
+                  component={AddFolder}
+                />
+              </ErrorBoundary>
+              <ErrorBoundary>
+                <Route
+                  exact path={['/folder/:folderId', '/']}
+                  component={Notes}
+                />
+              </ErrorBoundary>
             </div>
           </div>
         </div>

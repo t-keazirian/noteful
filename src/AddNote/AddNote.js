@@ -2,19 +2,23 @@ import React from 'react';
 import ApiContext from '../Context/ApiContext';
 import config from '../config';
 import './addnote.css';
+import ValidationError from '../ValidationError/ValidationError';
 
 class AddNote extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: {
-        value: ''
+        value: '',
+        touched: false,
       },
       content: {
-        value: ''
+        value: '',
+        touched: false,
       },
       folder: {
-        selected: ''
+        selected: '',
+        value: 'none',
       }
     }
   }
@@ -46,7 +50,8 @@ class AddNote extends React.Component {
   updateName(name) {
     this.setState({
       name: {
-        value: name
+        value: name,
+        touched: true,
       }
     })
   }
@@ -54,7 +59,8 @@ class AddNote extends React.Component {
   updateContent(content) {
     this.setState({
       content: {
-        value: content
+        value: content,
+        touched: true,
       }
     })
   }
@@ -62,15 +68,39 @@ class AddNote extends React.Component {
   updateFolder(folder) {
     this.setState({
       folder: {
-        selected: folder
+        selected: folder,
+        touched: true,
       }
     })
   }
 
+  validateName() {
+    const name = this.state.name.value.trim();
+    if (name.length === 0) {
+      return 'Your note must have a name.'
+    }
+  }
+
+  validateContent() {
+    const content = this.state.content.value.trim();
+    if (content.length === 0) {
+      return 'Your note must have content.'
+    }
+  }
+
+  validateFolder() {
+    const value = this.state.folder.selected;
+    if (value === 'none') {
+      return 'You must select a folder'
+    }
+  }
+
   render() {
+    const nameError = this.validateName();
+    const contentError = this.validateContent();
+    const folderError = this.validateFolder();
     const { folders =[] } = this.context;
     const foldersArray = folders.map(folder => <option key={folder.id} value={folder.id}>{folder.name}</option>)
-    // console.log(folders)
 
     return (
       <div className='new-note-container'>
@@ -83,21 +113,30 @@ class AddNote extends React.Component {
             <label htmlFor='note-name-input'>Name:</label>
             <input type='text' id='note-name-input' name='note-name-input' onChange={e=> this.updateName(e.target.value)}/>
           
+          {this.state.name.touched && (<ValidationError message={nameError} />)}
         
             <label htmlFor='note-content-input'>Content:</label>
             <input type='text' id='note-content-input' name='note-content-input' onChange={e=> this.updateContent(e.target.value)}/>
+
+            {this.state.content.touched && (<ValidationError message={contentError} />)}
         
             <label htmlFor='note-folder-select'>Folder:</label>
-            <select id='note-folder-select' onChange={e => this.updateFolder(e.target.value)}>
+            <select id='note-folder-select' onChange={e => this.updateFolder(e.target.value)}
+            >
               <option value='none'>Choose a folder</option>
               {foldersArray}
             </select>
+
+        {this.state.folder.selected && (<ValidationError message={folderError} />)}
         
         </div>
         <div className='button-div'>
           <button 
             type='submit'
             className='note-submit-button'
+            disabled={
+              this.validateContent() || this.validateName() || this.validateFolder()
+            }
           >
             Add Note</button>
         </div>
@@ -106,9 +145,5 @@ class AddNote extends React.Component {
     )
   }
 }
-
-  // AddNote.propTypes = {
-
-  // }
 
 export default AddNote;
