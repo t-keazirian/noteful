@@ -2,7 +2,6 @@ import React from 'react';
 import './folders.css';
 import { Link, NavLink } from "react-router-dom";
 import ApiContext from '../Context/ApiContext';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 class Folders extends React.Component {
 
@@ -12,7 +11,6 @@ class Folders extends React.Component {
     const { folders=[] } = this.context;
     return (
       <div className='folders-container'>
-      <ErrorBoundary>
         <ul>
           {folders.map(folder => 
           <NavLink
@@ -48,7 +46,6 @@ class Folders extends React.Component {
               Add Note
             </button>
         </Link>
-        </ErrorBoundary>
       </div>
     )
   }
