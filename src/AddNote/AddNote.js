@@ -69,7 +69,7 @@ class AddNote extends React.Component {
     this.setState({
       folder: {
         selected: folder,
-        touched: true,
+        value: folder
       }
     })
   }
@@ -89,8 +89,9 @@ class AddNote extends React.Component {
   }
 
   validateFolder() {
-    const value = this.state.folder.selected;
-    if (value === 'none') {
+    const selected = this.state.folder.selected;
+    const value = this.state.folder.value;
+    if (selected === '' || value === 'none') {
       return 'You must select a folder'
     }
   }
