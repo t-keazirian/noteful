@@ -111,18 +111,34 @@ class AddNote extends React.Component {
           onSubmit={e => this.handleSubmit(e)}
         >
           <div className='field'>
-            <label htmlFor='note-name-input'>Name:</label>
-            <input type='text' id='note-name-input' name='note-name-input' onChange={e=> this.updateName(e.target.value)}/>
+            <label 
+              htmlFor='note-name-input'>
+              Name:
+            </label>
+            <input 
+              type='text' 
+              id='note-name-input' name='note-name-input' 
+              aria-label='Name for new note' aria-required='true' 
+              onChange={e=> this.updateName(e.target.value)}/>
           
           {this.state.name.touched && (<ValidationError message={nameError} />)}
         
-            <label htmlFor='note-content-input'>Content:</label>
-            <input type='text' id='note-content-input' name='note-content-input' onChange={e=> this.updateContent(e.target.value)}/>
-
+            <label 
+              htmlFor='note-content-input'>
+              Content:
+            </label>
+            <input 
+              type='text'    
+              id='note-content-input' name='note-content-input' aria-label='Content for new note' aria-required='true' onChange={e=> this.updateContent(e.target.value)}/>
             {this.state.content.touched && (<ValidationError message={contentError} />)}
         
-            <label htmlFor='note-folder-select'>Folder:</label>
-            <select id='note-folder-select' onChange={e => this.updateFolder(e.target.value)}
+            <label
+              htmlFor='note-folder-select'>
+              Folder:
+            </label>
+            <select 
+              id='note-folder-select' 
+              onChange={e => this.updateFolder(e.target.value)}
             >
               <option value='none'>Choose a folder</option>
               {foldersArray}

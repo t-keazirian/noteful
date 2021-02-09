@@ -59,21 +59,30 @@ class AddFolder extends React.Component {
     return (
       <div className='new-folder-container'>
         <h2>Create a new folder:</h2>
-        <form className='new-folder-form' onSubmit={e => this.handleSubmit(e)}>
+        <form 
+          className='new-folder-form' 
+          onSubmit={e => this.handleSubmit(e)}>
           <div className='field'>
-            <label htmlFor='folder-name-input'>Folder Name:</label>
-            <input type='text' id='folder-name-input' name='folder-name-input' onChange={e => this.updateFolder(e.target.value)}/>
+            <label 
+              htmlFor='folder-name-input'>
+              Folder Name:
+            </label>
+            <input 
+              type='text' 
+              id='folder-name-input' name='folder-name-input' aria-label='Name for new folder' aria-required='true' 
+              onChange={e => this.updateFolder(e.target.value)}/>
           </div>
 
       {this.state.folder.touched && <ValidationError message={folderError} />}
 
           <div className='button-div'>
             <button 
-            type='submit' className='folder-submit-button'
-            disabled={
+              type='submit' className='folder-submit-button'
+              disabled={
               this.validateFolder()
-            }
-            >Add Folder</button>
+              }>
+              Add Folder
+            </button>
           </div>
         </form>
       </div>

@@ -71,12 +71,14 @@ class App extends React.Component {
       <ApiContext.Provider 
         value={contextValue}>
         <div className='App'>
-          <ErrorBoundary>
-            <Route
-              path='/'
-              component={Main}
-            />
-          </ErrorBoundary>
+          <div className='main-header'>
+            <ErrorBoundary>
+              <Route
+                path='/'
+                component={Main}
+              />
+            </ErrorBoundary>
+          </div>
           <div className='container'>
             <div className='folders'>
               <ErrorBoundary>

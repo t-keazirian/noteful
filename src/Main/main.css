@@ -1,13 +1,14 @@
 h1 {
   display: flex;
   text-align: center;
-  font-size: 75px;
+  font-size: 60px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  height: 100px;
+  height: 80px;
   background-color: #7c8da2;
   margin: 0;
   justify-content: center;
   align-items: center;
+  padding-top: 10px;
 }
 
 a:link {
