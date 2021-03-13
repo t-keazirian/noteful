@@ -22,8 +22,22 @@ class App extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/notes`),
-      fetch(`${config.API_ENDPOINT}/folders`)
+      fetch(`${config.API_ENDPOINT}/api/notes`, 
+      // {
+      //   method: 'GET',
+      //   headers: {
+      //     'content-type': 'application/json'
+      //   }
+      // }
+      ),
+      fetch(`${config.API_ENDPOINT}/api/folders`, 
+      // {
+      //   method: 'GET',
+      //   headers: {
+      //     'content-type': 'application/json'
+      //   }
+      // }
+      )
     ])
     .then(([notesResponse, foldersResponse]) => {
       if (!notesResponse.ok) 
@@ -42,7 +56,7 @@ class App extends React.Component {
   }
   
   handleDeleteNote = (noteId) => {
-    const newNotes = this.state.notes.filter(note => note.id !== noteId);
+    const newNotes = this.state.notes.filter(note => note.id !== parseInt(noteId));
 
     this.setState({notes: newNotes});
   }

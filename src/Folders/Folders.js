@@ -20,8 +20,9 @@ class Folders extends React.Component {
           >
             <li 
               className='folder-list'
+              key={folder.id}
             >
-              {folder.name}
+              {folder.folder_name}
             </li>
           </NavLink>
           )}

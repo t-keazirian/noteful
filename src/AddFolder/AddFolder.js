@@ -21,10 +21,10 @@ class AddFolder extends React.Component {
     event.preventDefault();
     const { folder } = this.state;
     const folderObject = {
-      "name": folder.value
+      "folder_name": folder.value
     }
 
-    fetch(`${config.API_ENDPOINT}/folders`, {
+    fetch(`${config.API_ENDPOINT}/api/folders`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

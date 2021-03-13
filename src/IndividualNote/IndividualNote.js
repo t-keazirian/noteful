@@ -14,7 +14,7 @@ class IndividualNote extends React.Component {
   }
 
   handleClickDelete = () => {
-    fetch(`${config.API_ENDPOINT}/notes/${this.props.match.params.id}`, {
+    fetch(`${config.API_ENDPOINT}/api/notes/${this.props.match.params.id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -28,9 +28,9 @@ class IndividualNote extends React.Component {
     render() {
     const { notes=[], folders=[] } = this.context;
 
-    const oneNote = notes.find(note => note.id === this.props.match.params.id)
+    const oneNote = notes.find(note => note.id === parseInt(this.props.match.params.id))
 
-    const currentFolder = folders.find(folder => folder.id === oneNote.folderId)
+    const currentFolder = folders.find(folder => folder.id === oneNote.folder_id)
 
     return (
 

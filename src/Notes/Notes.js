@@ -3,13 +3,21 @@ import './notes.css';
 import Moment from 'react-moment';
 import { Link } from "react-router-dom";
 import ApiContext from '../Context/ApiContext';
+import config from '../config';
 
 class Notes extends React.Component {
 
   static contextType = ApiContext;
 
   handleClickDelete = (noteId) => {
-        this.context.deleteNote(noteId);
+    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    }).then(() => {
+      this.context.deleteNote(noteId);
+    });
   }
 
   render() {
@@ -18,7 +26,7 @@ class Notes extends React.Component {
       if (!this.props.match.params.folderId) {
         return true;
       } 
-      return n.folderId === this.props.match.params.folderId;
+      return n.folder_id === parseInt(this.props.match.params.folderId);
     });
       
     return (
@@ -30,7 +38,7 @@ class Notes extends React.Component {
               className='notes-list'
             >
               <Link className="flex-full" to={`/note/${note.id}`}>
-                <h2>{note.name}</h2>
+                <h2>{note.note_name}</h2>
               </Link>
               <div className="flex-full note-details">
                 <span>

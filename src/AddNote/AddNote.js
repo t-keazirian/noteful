@@ -29,12 +29,12 @@ class AddNote extends React.Component {
     event.preventDefault();
     const { name, content, folder } = this.state;
     const noteObject = {
-      "name": name.value,
-      "folderId": folder.selected,
+      "note_name": name.value,
+      "folder_id": folder.selected,
       "content": content.value
     }
 
-    fetch(`${config.API_ENDPOINT}/notes`, {
+    fetch(`${config.API_ENDPOINT}/api/notes`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -101,7 +101,7 @@ class AddNote extends React.Component {
     const contentError = this.validateContent();
     const folderError = this.validateFolder();
     const { folders =[] } = this.context;
-    const foldersArray = folders.map(folder => <option key={folder.id} value={folder.id}>{folder.name}</option>)
+    const foldersArray = folders.map(folder => <option key={folder.id} value={folder.id}>{folder.folder_name}</option>)
 
     return (
       <div className='new-note-container'>

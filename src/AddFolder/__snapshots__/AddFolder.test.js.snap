@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add Folder tests renders the UI as expected 1`] = `
+<div
+  className="new-folder-container"
+>
+  <h2>
+    Create a new folder:
+  </h2>
+  <form
+    className="new-folder-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="field"
+    >
+      <label
+        htmlFor="folder-name-input"
+      >
+        Folder Name:
+      </label>
+      <input
+        aria-label="Name for new folder"
+        aria-required="true"
+        id="folder-name-input"
+        name="folder-name-input"
+        onChange={[Function]}
+        type="text"
+      />
+    </div>
+    <div
+      className="button-div"
+    >
+      <button
+        className="folder-submit-button"
+        disabled="Your folder must have a name."
+        type="submit"
+      >
+        Add Folder
+      </button>
+    </div>
+  </form>
+</div>
+`;
