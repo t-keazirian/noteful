@@ -46,7 +46,7 @@ class IndividualNote extends React.Component {
           ? <div>
               <h2 className='folder-name'>{currentFolder.name}</h2>
               <div className='one-note'>
-                <h2>{oneNote.name}</h2>
+                <h2>{oneNote.note_name}</h2>
                 <p className='modified-date'>
                   Modified{' '} 
                   <Moment format='D MMM YYYY'>
